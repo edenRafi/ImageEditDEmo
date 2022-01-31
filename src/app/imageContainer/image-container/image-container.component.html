@@ -1,0 +1,22 @@
+<canvas width="600" height="600" style="border: 1px solid #cccccc;" id="canvas"></canvas>
+<li>
+    <label>rotate</label>
+    <input #rotation type="range" (input)="changeRotation(this.rotation.value)">
+</li>
+<li>
+    <label>brightness</label>
+    <input #brightness type="range" (input)="changeBrightness(this.brightness.value)">
+</li>
+<li>
+    <label>sharpness</label>
+    <input #sharpness type="range" (input)="changeSharpness(this.sharpness.value)">
+</li>
+<li>
+    <button (click)="SetEditStateToTagState()">Draw Tag</button>
+</li>
+<li>
+    <button>Draw Text</button>
+</li>
+<li>
+    <button>Draw Line</button>
+</li>
