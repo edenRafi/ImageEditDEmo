@@ -1,4 +1,5 @@
 import { createAction, props } from "@ngrx/store";
+import { Line } from "../dataTypes/line";
 import { MissionImage } from "../dataTypes/missionImage";
 import { Tag } from "../dataTypes/tag";
 import { ImageText } from "../dataTypes/text";
@@ -9,12 +10,18 @@ export const LoadImageSuccess = createAction('[Mission] LoadImage Manipulations 
 export const LoadImageManipulations = createAction('[Mission] LoadImage Manipulations');
 export const LoadImageTags = createAction('[Mission] LoadImage Tags',props<{tags : Tag[]}>());
 export const LoadImageTexts = createAction('[Mission] LoadImage Texts',props<{texts : ImageText[]}>());
+export const LoadImageLines = createAction('[Mission] LoadImage Lines',props<{lines : Line[]}>());
 
 export const TagStateNotDrawing = createAction('[Image - Tag State] Enter Tag State');
 export const TagStateDrawingCompleted = createAction('[Image - Tag State] Drawing Tag Completed',
 props<{x : number , y : number , radius : number }>());
 export const TagStateDrawingSuccess = createAction('[Image - Tag State] Drawing tag Success',props<{tag : Tag}>());
 export const TagStateExit = createAction('[Image - Tag State] Exit Tag State');
+
+export const lineStateDrawingCompleted = createAction('[Image - Tag State] Drawing Tag Completed',
+props<{p1 : {x : number, y : number} , p2 : {x : number , y : number} }>());
+export const lineStateDrawingSuccess = createAction('[Image - Tag State] Drawing Tag Success',
+props<{line : Line}>());
 
 export const TextStateNotWriting = createAction('[Image - Text State] Not Writing Text');
 export const TextStateWriting = createAction('[Image - Text State] Writing Text');

@@ -11,7 +11,7 @@ export class ImageContainerComponent implements OnInit {
 
   canvas: any = null;
 
-  constructor(private facade: ImageContainerFacadeService) {
+  constructor(private facade: ImageContainerFacadeService ) {
 
   }
 
@@ -40,6 +40,10 @@ export class ImageContainerComponent implements OnInit {
 
   changeSharpness(brightness: any) {
     this.facade.applySharpness((<number>brightness) / 10);
+  }
+
+  drawLine() {
+    this.facade.EnterLineState();
   }
 
 }

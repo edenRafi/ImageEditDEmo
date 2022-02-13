@@ -1,3 +1,4 @@
+import { Line } from "./line";
 import { Tag } from "./tag";
 import { ImageText } from "./text";
 
@@ -6,4 +7,5 @@ export interface MissionImage {
     address: string;
     tags : Tag[];
     texts : ImageText[];
+    lines : Line[];
 }

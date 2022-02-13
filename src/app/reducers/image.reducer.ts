@@ -13,7 +13,8 @@ export const imageReducer = createReducer<ImageState>(
         rotationState: {
             rotationAxis: { x: 0, y: 0 },
             currentImageRotation: 0
-        }
+        },
+        lines : null
     },
     on(ImageActions.LoadImage, (state, imageData) => {
         console.log(`Load Image dispatched! mission id ${imageData.missionId} image id ${imageData.imageId}`);
@@ -26,6 +27,13 @@ export const imageReducer = createReducer<ImageState>(
     on(ImageActions.LoadImageManipulations, state => {
         return {
             ...state,
+        }
+    }),
+    on(ImageActions.LoadImageLines, (state, imageData) => {
+        console.log("Load Image Tags dispatched!");
+        return {
+            ...state,
+            lines: imageData.lines
         }
     }),
     on(ImageActions.LoadImageTags, (state, imageData) => {
@@ -72,5 +80,6 @@ export const imageReducer = createReducer<ImageState>(
 
     on(ImageActions.TextStateNotWriting, state => { return { ...state } }),
     on(ImageActions.TextStateExit, state => { return { ...state } }),
+    on(ImageActions.lineStateDrawingCompleted , state => { return { ...state }})
 
 )

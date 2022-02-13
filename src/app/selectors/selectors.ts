@@ -32,6 +32,11 @@ export const getTextsFeatureState = createSelector(
     state => state.texts
 )
 
+export const getLinesFeatureState = createSelector(
+    getImageFeatureState,
+    state => state.lines
+)
+
 export const gerRotationStateFeatureState = createSelector(
     getImageFeatureState,
     state => state.rotationState

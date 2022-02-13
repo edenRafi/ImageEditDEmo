@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { delay, Observable, of, timer } from 'rxjs';
 import { LoadImageTags } from '../actions/imageActions';
+import { Line } from '../dataTypes/line';
 import { Mission } from '../dataTypes/mission';
 import { MissionImage } from '../dataTypes/missionImage';
 import { Tag } from '../dataTypes/tag';
@@ -9,6 +10,13 @@ import { Tag } from '../dataTypes/tag';
   providedIn: 'root'
 })
 export class FakeServerService {
+  AddLine(lineData: any, missionId: string, imageId: string)  : 
+  Observable<Line>{
+    const image = {...this.missions[missionId].missionImages.filter(image => imageId == image.imageId)[0]};
+    const line = { p1 : lineData.p1 , p2 : lineData.p2} as Line;
+    image.lines = [...image.lines,line];
+    return this.ReturnFakeAsyncOf(line,40);
+  }
 
   constructor() { }
 
@@ -66,19 +74,22 @@ export class FakeServerService {
           ],
           texts: [
             { content : "123eden" , x : 200 , y : 50 , id : 5}
-          ]
+          ],
+          lines: [ { p1 : {x : 100 , y : 100 } , p2 : {x:200,y:200}}]
         },
         {
           imageId: "12",
           address: "/assets/images/LythrumSalicaria-flower-1mb.jpg",
           tags: [ ],
-          texts: [  ]
+          texts: [  ],
+          lines: []
         },
         {
           imageId: "13",
           address: "/assets/images/pexels-photo-2440079.jpeg",
           tags: [ ],
-          texts: [  ]
+          texts: [  ],
+          lines: []
         }
 
       ]
@@ -90,19 +101,22 @@ export class FakeServerService {
           imageId: "21",
           address: "/assets/images/andromeda_1920x1200.jpg",
           tags: [ ],
-          texts: [  ]
+          texts: [  ],
+          lines: []
         },
         {
           imageId: "22",
           address: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Sunflower_from_Silesia2.jpg/1200px-Sunflower_from_Silesia2.jpg",
           tags: [ ],
-          texts: [  ]
+          texts: [  ],
+          lines: [ ]
         },
         {
           imageId: "23",
           address: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Sunflower_from_Silesia2.jpg/1200px-Sunflower_from_Silesia2.jpg",
           tags: [ ],
-          texts: [  ]
+          texts: [  ],
+          lines: []
         }
 
       ]

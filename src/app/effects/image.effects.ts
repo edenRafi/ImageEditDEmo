@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core"
 import { Actions, ofType, createEffect } from "@ngrx/effects"
-import { catchError, combineLatest, map, mergeMap, of, withLatestFrom } from "rxjs"
+import { catchError, combineLatest, map, mergeMap, of, tap, withLatestFrom } from "rxjs"
 import { FakeServerService } from "../services/fake-server.service"
 import * as ImageActions from '../actions/imageActions';
 import { ImageContainerFacadeService } from "../imageContainerFacade/image-container-facade.service";
@@ -28,6 +28,7 @@ export class ImageEffects {
                             ImageActions.LoadImageSuccess({ image: image }),
                             ImageActions.LoadImageTags({tags : image.tags}),
                             ImageActions.LoadImageTexts({texts : image.texts}),
+                            ImageActions.LoadImageLines({lines : image.lines }),
                             ImageActions.LoadImageManipulations()
                         ]
                     ),
@@ -54,11 +55,19 @@ export class ImageEffects {
     addTag = createEffect(() => {
         return this.actions$.pipe(
             ofType(ImageActions.TagStateDrawingCompleted),
-
             withLatestFrom(this.store.select(getMissionIdFeatureState),this.store.select(getImageIdFeatureState)),
-
             mergeMap(([tagData, missionId,imageId]) => this.imagesService.AddTag(tagData,missionId,imageId).pipe(
                 map(tag => ImageActions.TagStateDrawingSuccess({tag : tag}))
+            ))
+        )
+    })
+
+    addLine = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(ImageActions.lineStateDrawingCompleted),
+            withLatestFrom(this.store.select(getMissionIdFeatureState),this.store.select(getImageIdFeatureState)),
+            mergeMap(([lineData, missionId,imageId]) => this.imagesService.AddLine(lineData,missionId,imageId).pipe(
+                map(line => ImageActions.lineStateDrawingSuccess({line : line}))
             ))
         )
     })
